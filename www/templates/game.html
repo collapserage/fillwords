@@ -1,0 +1,25 @@
+<ion-view>
+  <ion-content scroll="false">
+    <ion-nav-view>
+    <div id="flex-wrap" ng-class="{'hidden': nextRound}">
+      <div id="panel">
+        <div style="background: green; width: 5vh; height: 5vh;"></div>
+        <div ng-bind="score">0</div>
+
+        <div ng-bind="score">0</div>
+        <div style="background: purple; width: 5vh; height: 5vh;"></div>
+      </div>
+
+      <div id="round" ng-bind="roundString"></div>
+
+      <div id="field">
+        <div class="field-row" ng-repeat="row in serverData.gameField track by $index">
+          <div class="field-cell" ng-repeat="cell in row track by $index" ng-bind="cell"></div>
+        </div>
+      </div>
+
+      <time ng-bind="time"></time>
+    </div>
+    </ion-nav-view>
+  </ion-content>
+</ion-view>
