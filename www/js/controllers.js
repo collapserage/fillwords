@@ -1,39 +1,22 @@
 angular.module('fillwords.controllers', [])
 
-    .controller('MainMenu', function($scope, $rootScope, $timeout, Loader) {
-        $scope.$on('$ionicView.enter', function() {
-            $rootScope.topSlided = false;
-            $rootScope.bottomSlided = false;
-            $rootScope.getLoader = function() {
-                return Loader.get()
-            };
-        });
-
+    .controller('MainMenu', function($scope, $state, $rootScope, $timeout) {
         $scope.showStats = function() {
-            window.location = '#/stats'
+            $state.go('stats', {movieid: 1})
         };
 
         $scope.playSingleplayer = function() {
-            $rootScope.loaderMessage = 'Загрузка..';
-            $rootScope.topSlided = true;
-            Loader.show();
-            $timeout(function() {
-                window.location = '#/game'
-            }, 3000)
+            $state.go('game')
         };
 
         $scope.playMultiplayer = function() {
-            $rootScope.loaderMessage = 'Поиск противника..';
-            $rootScope.bottomSlided = true;
-            Loader.show();
-            $timeout(function() {
-                window.location = '#/lobby'
-            }, 3000)
+            $state.go('loader')
         };
     })
 
-    .controller('Game', function($scope, $rootScope, $timeout, $interval, $document, Loader) {
+    .controller('Game', function($scope, $state, $rootScope, $timeout, $interval, $document) {
         $scope.round = 1;
+
         $scope.$on('$ionicView.enter', function() {
             $scope.startRound($scope.round);
         });
@@ -41,22 +24,18 @@ angular.module('fillwords.controllers', [])
         $scope.startRound = function() {
             var int = $interval(function() {
                 if ($scope.time == 0) {
-                    window.location = '#/game/nextRound';
+                    $state.go('nextRound');
                     //$scope.startRound(++$scope.round);
                     $interval.cancel(int);
                 }
                 $scope.time--;
             }, 1000);
 
-            Loader.hide();
-            $rootScope.bottomSlided = true;
-            $rootScope.logoHidden = true;
-
             $scope.roundString = 'Раунд ' + $scope.round;
             $scope.word = '';
             $scope.wordCoordinates = [];
             $scope.score = 0;
-            $scope.time = 10;
+            $scope.time = 20;
             $scope.serverData = {
                 gameID: 1,
                 gameField: [
@@ -131,39 +110,27 @@ angular.module('fillwords.controllers', [])
                 }
             }
         });
-
-        $scope.$on('$ionicView.leave', function() {
-            $rootScope.logoHidden = false;
-        });
     })
 
-    .controller('NextRound', function($scope, $rootScope, $timeout) {
-        $scope.$on('$ionicView.enter', function() {
-            $timeout(function() {
-                window.location = '#/game';
-            }, 4000)
-        })
+    .controller('GameNextRound', function($scope, $state, $rootScope, $timeout) {
+        $timeout(function() {
+            $state.go('game')
+        }, 4000)
     })
 
-    .controller('Lobby', function($scope, $rootScope, $timeout, Loader) {
-        $scope.$on('$ionicView.enter', function() {
-            $rootScope.bottomSlided = false;
-
-            $timeout(function() {
-                $rootScope.bottomSlided = false;
-                Loader.hide();
-            }, 500);
-
-            $timeout(function() {
-                $rootScope.bottomSlided = true;
-                window.location = '#/game'
-            }, 4500);
-        })
+    .controller('Lobby', function($state, $timeout) {
+        $timeout(function() {
+            $state.go('game')
+        }, 5000);
     })
 
-    .controller('Stats', function($scope, $rootScope, $timeout, Loader) {
-        $rootScope.logoHidden = true;
-        $rootScope.bottomSlided = true;
+    .controller('Loader', function($state, $timeout) {
+        $timeout(function() {
+            $state.go('lobby')
+        }, 5000);
+    })
+
+    .controller('Stats', function($scope) {
         $scope.data = [
             {
                 name: "Kate",
