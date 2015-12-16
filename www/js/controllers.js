@@ -1,6 +1,13 @@
 angular.module('fillwords.controllers', [])
 
-    .controller('MainMenu', function($scope, $state, $rootScope, $timeout) {
+    .controller('MainMenu', function($scope, $state, $rootScope, $timeout, $http) {
+        $http({
+            method: 'GET',
+            url: 'http://collapsed.space:1337'
+        }).then(function successCallback(response) {
+            console.log(response.data);
+        }, function errorCallback(response) {});
+
         $scope.showStats = function() {
             $state.go('stats', {movieid: 1})
         };
