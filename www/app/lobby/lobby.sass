@@ -1,0 +1,26 @@
+@keyframes lobby
+    100%
+        transform: translateY(0)
+
+#lobby-me, #lobby-opponent
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+
+    height: 49vh
+    width: 100%
+    background: rgba(0, 0, 0, .2)
+
+#lobby-me
+    transform: translateY(-49vh)
+    animation: lobby .5s forwards 1s
+
+#lobby-opponent
+    transform: translateY(49vh)
+    animation: lobby .5s forwards 1s
+
+#lobby-separator
+    height: 2vh
+    width: 100%
+    background: rgba(0, 0, 0, .6)

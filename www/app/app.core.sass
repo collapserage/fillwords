@@ -1,0 +1,101 @@
+@import "game/game"
+@import "loader/loader"
+@import "lobby/lobby"
+@import "menu/menu"
+@import "multiplayer/multiplayer"
+@import "nextRound/nextRound"
+@import "singleplayer/singleplayer"
+@import "stats/stats"
+
+@keyframes fade-in
+    100%
+        opacity: 1
+        transform: translateY(0px)
+
+@keyframes fade-out
+    100%
+        opacity: 0
+
+*
+    box-shadow: 0 // performance increase, just in case
+
+html, body
+    font-size: 16px
+    height: 100%
+
+body
+    opacity: 0
+    transition: opacity 1s
+
+    &.loaded
+        opacity: 1
+
+ion-nav, button
+    color: white
+
+ion-page
+    background: url('../img/background.jpg')
+    background-size: cover
+
+ion-content
+    background: none
+
+.bar-button-default
+    color: white
+
+scroll-content /* was #flex-wrap */
+    display: flex
+    justify-content: space-around
+    align-items: center
+    flex-direction: column
+    height: 100%
+    //opacity: 0
+    //animation: fade-in 1s forwards .5s
+
+.flex-center scroll-content
+    justify-content: center
+
+#buttons
+    display: flex
+    flex-direction: column
+
+    button
+        margin: 20px
+
+icon
+    font-size: 8em
+
+ion-slides
+    height: 40vh
+    width: 50vw
+
+#slider
+    display: flex
+    align-items: center
+    justify-content: space-around /* make media query later! set to center for large screens */
+    width: 100%
+
+    .slider-control-prev,
+    .slider-control-next
+        font-size: 5em
+        opacity: .5
+        cursor: pointer
+
+scroll-content
+    overflow-y: hidden
+
+//ion-app
+    position: relative
+    height: 100%
+    width: 100%
+
+//.hidden
+    opacity: 0 !important
+    animation: none !important
+
+//.shown
+    transform: translateY(0) !important
+    opacity: 1 !important
+
+//.pane
+    background: transparent

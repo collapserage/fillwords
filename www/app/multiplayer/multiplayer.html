@@ -1,0 +1,33 @@
+<ion-navbar *navbar>
+    <ion-title>Мультиплеер</ion-title>
+</ion-navbar>
+
+<ion-content>
+    <div id="slider">
+        <icon class="slider-control-prev ion-ios-arrow-back"></icon>
+
+        <ion-slides bounce>
+            <ion-slide>
+                <icon class="ion-md-globe"></icon>
+                <h4>Общая</h4>
+            </ion-slide>
+
+            <ion-slide>
+                <icon class="ion-md-game-controller-b"></icon>
+                <h4>Игры</h4>
+            </ion-slide>
+
+            <ion-slide>
+                <icon class="ion-ios-leaf"></icon>
+                <h4>Природа</h4>
+            </ion-slide>
+        </ion-slides>
+
+        <icon class="slider-control-next ion-ios-arrow-forward"></icon>
+    </div>
+
+    <div id="buttons">
+        <button (click)="play()">Играть</button>
+        <button (click)="showStats()">Статистика</button>
+    </div>
+</ion-content>

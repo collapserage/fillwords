@@ -1,0 +1,14 @@
+<ion-navbar *navbar>
+    <ion-title>Статистика</ion-title>
+</ion-navbar>
+
+<ion-content class="flex-center">
+    <div id="stats">
+        <div>
+            <div class="stat-single" *ngFor="#person of data">{{ person.name }}</div>
+        </div>
+        <div>
+            <div class="stat-single" *ngFor="#person of data">{{ person.score }}</div>
+        </div>
+    </div>
+</ion-content>

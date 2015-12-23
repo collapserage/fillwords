@@ -1,0 +1,9 @@
+<ion-content>
+    <h2 *ngIf="win">{{ message }}</h2>
+    <h2 *ngIf="!win">Раунд {{ round }}</h2>
+    <h4>Счёт {{ score.me }}:{{ score.opponent }}</h4>
+    <div id="buttons">
+        <button (click)="loader()" *ngIf="win">Ещё раз</button>
+        <button (click)="menu()" *ngIf="win">В меню</button>
+    </div>
+</ion-content>

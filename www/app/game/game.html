@@ -1,0 +1,31 @@
+<div id="header-multiplayer" *ngIf="isMultiplayer">
+    <div class="person-avatar"></div>
+    <div class="game-info">
+        <div>
+            <div>Королёв Фёдор</div>
+            <div class="game-time">Время</div>
+            <div>Влад Азаревич</div>
+        </div>
+
+        <div>
+            <div class="game-important">{{ score.me }}</div>
+            <time class="game-important">{{ time }}</time>
+            <div class="game-important">{{ score.opponent }}</div>
+        </div>
+    </div>
+    <div class="person-avatar"></div>
+</div>
+
+<div id="header-singleplayer" class="game-important" *ngIf="!isMultiplayer">{{ time }}</div>
+
+<ion-content (mousedown)="start()" (touchstart)="start()"
+             (mouseup)="end()" (touchend)="end()"
+             (mousemove)="move($event)" (touchmove)="move($event)">
+    <ion-card>
+        <div id="field">
+            <div class="field-row" *ngFor="#row of currentField.field">
+                <div class="field-cell" *ngFor="#cell of row" [ngClass]="{'marked': cell.isHidden, 'uncapitalized': cell.isFirst}">{{ cell.letter }}</div>
+            </div>
+        </div>
+    </ion-card>
+</ion-content>
